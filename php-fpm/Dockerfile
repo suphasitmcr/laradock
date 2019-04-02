@@ -526,11 +526,14 @@ ENV INSTALL_OCI8 ${INSTALL_OCI8}
 
 ENV LD_LIBRARY_PATH /usr/local/instantclient/
 
+COPY ./instantclient-basic-linux.x64-12.2.0.1.0.zip /tmp/
+COPY ./instantclient-sdk-linux.x64-12.2.0.1.0.zip /tmp/
+
 RUN if [ ${INSTALL_OCI8} = true ]; then \
     apt-get update && \
     apt-get install -y zip unzip libaio1 wget && \
-    wget "https://s3-sa-east-1.amazonaws.com/4success-assets/instantclient-basic-linux.x64-12.2.0.1.0.zip" -P "/tmp" && \
-    wget "https://s3-sa-east-1.amazonaws.com/4success-assets/instantclient-sdk-linux.x64-12.2.0.1.0.zip" -P "/tmp" && \
+    # wget "https://s3-sa-east-1.amazonaws.com/4success-assets/instantclient-basic-linux.x64-12.2.0.1.0.zip" -P "/tmp" && \
+    # wget "https://s3-sa-east-1.amazonaws.com/4success-assets/instantclient-sdk-linux.x64-12.2.0.1.0.zip" -P "/tmp" && \
     unzip /tmp/instantclient-basic-linux.x64-12.2.0.1.0.zip -d /usr/local/ && \
     unzip /tmp/instantclient-sdk-linux.x64-12.2.0.1.0.zip -d /usr/local/ && \
     ln -s /usr/local/instantclient_12_2 /usr/local/instantclient && \
